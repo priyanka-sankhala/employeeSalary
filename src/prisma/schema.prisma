@@ -1,0 +1,18 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Employee {
+  id        String   @id @default(uuid())
+  fullName  String
+  jobTitle  String
+  country   String
+  salary    Float
+  createdAt DateTime @default(now())
+}
