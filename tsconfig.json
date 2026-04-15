@@ -7,9 +7,11 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
+    "module": "node16",
+    "moduleResolution": "node16",
+    "target": "es2020",
+    "types": ["node", "jest"],
+
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -34,13 +36,9 @@
 
     // Recommended Options
     "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
+    "esModuleInterop": true,
     "skipLibCheck": true,
   },
-"include": ["src/**/*.ts", "tests/**/*.ts"],
-"types": ["node", "jest"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["tests", "prisma.config.ts", "dist", "node_modules"]
 }
