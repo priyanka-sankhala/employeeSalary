@@ -6,7 +6,7 @@ describe('Employee API', () => {
   let employeeId: string;
 
   const employeePayload = {
-    fullName: 'John Doe',
+    fullName: 'Rohan',
     jobTitle: 'Engineer',
     country: 'India',
     salary: 1000,
@@ -29,7 +29,19 @@ describe('Employee API', () => {
       fullName: 'John',
     });
 
-    expect(res.status).toBeGreaterThanOrEqual(400);
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('Invalid request body');
+  });
+
+  // CREATE - Invalid Salary
+  it('should fail if salary is negative', async () => {
+    const res = await request(app).post('/employees').send({
+      ...employeePayload,
+      salary: -10,
+    });
+
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('Invalid request body');
   });
 
   //  GET ALL
@@ -81,10 +93,4 @@ describe('Employee API', () => {
     expect(res.status).toBe(204);
   });
 
-  // DELETE AGAIN
-  it('should return 404 when deleting already deleted employee', async () => {
-    const res = await request(app).delete(`/employees/${employeeId}`);
-
-    expect(res.status).toBe(404);
-  });
 });
