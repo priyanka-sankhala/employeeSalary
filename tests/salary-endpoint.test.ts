@@ -35,4 +35,32 @@ describe('Salary Endpoint', () => {
     expect(res.body.deductions).toBe(0);
   });
 
+
+it('should return 404 if salary policy does not exist', async () => {
+  const res = await request(app).get('/salary/policy/Germany');
+
+  expect(res.status).toBe(404);
+});
+
+it('should handle zero salary correctly', async () => {
+  const res = await request(app).post('/salary/calculate').send({
+    country: 'India',
+    salary: 0,
+  });
+
+  expect(res.status).toBe(200);
+  expect(res.body.net).toBe(0);
+  expect(res.body.deductions).toBe(0);
+});
+
+it('should handle large salary values', async () => {
+  const res = await request(app).post('/salary/calculate').send({
+    country: 'India',
+    salary: 10000000,
+  });
+
+  expect(res.status).toBe(200);
+  expect(res.body.net).toBe(9000000);
+});
+
 });
