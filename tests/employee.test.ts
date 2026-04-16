@@ -93,4 +93,11 @@ describe('Employee API', () => {
     expect(res.status).toBe(204);
   });
 
+   //  DELETE AGAIN
+   it('should return 404 when deleting already deleted employee', async () => {
+    const res = await request(app).delete(`/employees/${employeeId}`);
+
+    expect(res.status).toBe(404);
+   })
+
 });

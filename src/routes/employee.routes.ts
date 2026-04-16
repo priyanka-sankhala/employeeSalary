@@ -1,11 +1,13 @@
 // src/routes/employee.routes.ts
 import { Router } from 'express';
 import { EmployeeController } from '../controllers/employee.controller';
+import { validate } from '../middlewares/validate';
+import { createEmployeeSchema } from '../validations/employee.validation';
 
 const router = Router();
 const controller = new EmployeeController();
 
-router.post('/', controller.create);
+router.post('/', validate(createEmployeeSchema), controller.create);
 router.get('/', controller.getAll);
 router.get('/:id', controller.getById);
 router.put('/:id', controller.update);
