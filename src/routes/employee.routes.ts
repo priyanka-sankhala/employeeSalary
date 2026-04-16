@@ -1,4 +1,3 @@
-// src/routes/employee.routes.ts
 import { Router } from 'express';
 import { EmployeeController } from '../controllers/employee.controller';
 import { validate } from '../middlewares/validate';

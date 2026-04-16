@@ -1,10 +1,14 @@
-// src/services/employee.service.ts
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
-
+type Employee = {
+  fullName: string;
+  jobTitle: string;
+  country: string;
+  salary: number;
+};
 export class EmployeeService {
-  create(data: any) {
+  create(data: Employee) {
     return prisma.employee.create({ data });
   }
 
